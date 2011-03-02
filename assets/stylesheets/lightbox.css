@@ -1,0 +1,11 @@
+div.attachments div.images
+{
+    border: 1px solid #CCCCCC;
+    padding: 10px;
+    margin: 10px;
+    display: inline-block;
+}
+div.attachments div.images a.lightbox
+{
+  margin: 0px 5px;
+}
