@@ -7,6 +7,6 @@ Redmine::Plugin.register :redmine_light_box do
   author 'G.K.'
   description 'Lightbox for attachments'
   version '0.0.1'
-  url 'http://example.com/path/to/plugin'
-  author_url 'http://www.rb2.nl'
+  url 'https://github.com/zipme/redmine_lightbox'
+  author_url 'https://github.com/zipme/redmine_lightbox'
 end
