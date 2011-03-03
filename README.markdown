@@ -10,7 +10,7 @@ Screenshots
 
 ![Screenshot 2](http://img.skitch.com/20110303-pufurh8rw42kin8h2jgjxu1nee.medium.jpg)
 
-![Screenshot 3](http://img.skitch.com/20110303-q2bqemgwccnfqdtt7shimguwm7.preview.jpg) 
+![Screenshot 3](https://img.skitch.com/20110303-q2bqemgwccnfqdtt7shimguwm7.medium.jpg) 
 
 Installation and Setup
 ----------------------
