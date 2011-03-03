@@ -9,3 +9,9 @@ div.attachments div.images a.lightbox
 {
   margin: 0px 5px;
 }
+
+a.pdf img
+{
+  margin: 0 4px;
+  width: 18px;
+}

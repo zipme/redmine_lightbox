@@ -1,14 +1,16 @@
 Redmine Lightbox plugin
 =======================
 
-This plugin lets you view the image attachments in a lightbox.
+This plugin lets you preview the image and pdf attachments in a lightbox.
 
 Screenshots
 -----------
 
 ![Screenshot 1](http://img.skitch.com/20110303-gj7p1qyb984s1yjn1takdfsid7.medium.jpg)
+
 ![Screenshot 2](http://img.skitch.com/20110303-pufurh8rw42kin8h2jgjxu1nee.medium.jpg)
 
+![Screenshot 3](http://img.skitch.com/20110303-q2bqemgwccnfqdtt7shimguwm7.preview.jpg) 
 
 Installation and Setup
 ----------------------
