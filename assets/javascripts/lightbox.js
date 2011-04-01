@@ -6,9 +6,9 @@
     		'transitionOut'	:	'elastic',
     		'speedIn'		:	600, 
     		'speedOut'		:	200
-    };
+  		}
     
-    $("div.attachments a.lightbox").fancybox(options);
+    $("div.attachments a.lightbox, div.attachments a.swf").fancybox(options);
     $.extend( 
       options, 
       {
