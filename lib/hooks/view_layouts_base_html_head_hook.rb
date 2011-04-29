@@ -4,6 +4,9 @@ module RedmineLightBox
       def view_layouts_base_html_head(context={})
         if context[:controller] && (  context[:controller].is_a?(IssuesController) || 
                                       context[:controller].is_a?(WikiController) ||
+                                      context[:controller].is_a?(DocumentsController) ||
+                                      context[:controller].is_a?(FilesController) || 
+                                      context[:controller].is_a?(MessageController) ||  
                                       context[:controller].is_a?(BoardsController))
           return stylesheet_link_tag("jquery.fancybox-1.3.4.css", :plugin => "redmine_lightbox", :media => "screen") +
             stylesheet_link_tag("lightbox.css", :plugin => "redmine_lightbox", :media => "screen") +
