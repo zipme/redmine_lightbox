@@ -12,7 +12,7 @@
     $.extend( 
       options, 
       {
-        'width': '80%', // or whatever 
+        'width': '100%', // or whatever 
         'height': '100%', 
         'autoDimensions': false,         
         'onClosed': function() { 
