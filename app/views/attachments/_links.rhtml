@@ -9,11 +9,11 @@
 			<% end -%>
 			
 		  <% if options[:deletable] %>
-		    <%= link_to image_tag('delete.png'), {:controller => 'attachments', :action => 'destroy', :id => attachment},
-		                                         :confirm => l(:text_are_you_sure),
-		                                         :method => :post,
-		                                         :class => "delete",
-		                                         :title => l(:button_delete) %>
+        <%= link_to image_tag('delete.png'), attachment_path(attachment),
+                                             :confirm => l(:text_are_you_sure),
+                                             :method => :delete,
+                                             :class => 'delete',
+                                             :title => l(:button_delete) %>
 		  <% end %>
 		
 		  <% if options[:author] %>
