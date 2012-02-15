@@ -20,3 +20,4 @@ Installation and Setup
 1. Follow the Redmine plugin installation steps at http://www.redmine.org/wiki/redmine/Plugins
 2. Restart your Redmine web servers (e.g. mongrel, thin, passenger)
 
+(The latest version only support redmine 1.3.0+ , for older version please download this package https://github.com/zipme/redmine_lightbox/zipball/7cd1d66d54f267015dcd0b0d0eadab251918de1d)
