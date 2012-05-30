@@ -1,36 +1,37 @@
 <div class="attachments">
-	<% attachments.each do |attachment| %>
-		<p><%= link_to_attachment attachment, :class => "icon icon-attachment" -%>
-		<%= h(" - #{attachment.description}") unless attachment.description.blank? %>
-		  <span class="size">(<%= number_to_human_size attachment.filesize %>)</span>
-		
-			<% if( attachment.filename =~ /.(pdf|swf)$/i )  %>
-				<%= link_to image_tag('preview.png', :plugin => 'redmine_lightbox'), {:controller => 'attachments', :action => "#{$1 === 'swf' ? 'download_inline' : 'show'}", :id => attachment, :filename => attachment.filename }, :class => $1, :rel => 'attachments', :title => "#{attachment.filename}#{ ('-' + attachment.description) unless attachment.description.blank? }" %>
-			<% end -%>
-			
-		  <% if options[:deletable] %>
-        <%= link_to image_tag('delete.png'), attachment_path(attachment),
-                                             :confirm => l(:text_are_you_sure),
-                                             :method => :delete,
-                                             :class => 'delete',
-                                             :title => l(:button_delete) %>
-		  <% end %>
-		
-		  <% if options[:author] %>
-		    <span class="author"><%= attachment.author %>, <%= format_time(attachment.created_on) %></span>
-		  <% end %>
-		  </p>
-	<% end %>
-	
+<% for attachment in attachments %>
+<p><%= link_to_attachment attachment, :class => 'icon icon-attachment', :download => true -%>
+  <% if attachment.is_text? %>
+    <%= link_to image_tag('magnifier.png'),
+                :controller => 'attachments', :action => 'show',
+                :id => attachment, :filename => attachment.filename %>
+  <% end %>
+  <%= h(" - #{attachment.description}") unless attachment.description.blank? %>
+  <span class="size">(<%= number_to_human_size attachment.filesize %>)</span>
+  <% if( attachment.filename =~ /.(pdf|swf)$/i ) %>
+    <%= link_to image_tag('preview.png', :plugin => :redmine_lightbox), {:controller => 'attachments', :action => "#{$1 === 'swf' ? 'download_inline' : 'show'}", :id => attachment, :filename => attachment.filename }, :class => $1, :rel => 'attachments', :title => "#{attachment.filename}#{ ('-' + attachment.description) unless attachment.description.blank? }" %>
+  <% end -%>
+  <% if options[:deletable] %>
+    <%= link_to image_tag('delete.png'), attachment_path(attachment),
+                                         :confirm => l(:text_are_you_sure),
+                                         :method => :delete,
+                                         :class => 'delete',
+                                         :title => l(:button_delete) %>
+  <% end %>
+  <% if options[:author] %>
+    <span class="author"><%= h(attachment.author) %>, <%= format_time(attachment.created_on) %></span>
+  <% end %>
+  </p>
+<% end %>
 <% images = attachments.select { |a| a.image? } %>
-
 <% unless images.empty? %>
-	<div class='images'>
-		<% images.each do |attachment| %>
-			<%= link_to image_tag(url_for({:controller => 'attachments', :action => 'show', :id => attachment, :filename => attachment.filename }), :width => '180'), 
-			{:controller => 'attachments', :action => 'show', :id => attachment, :filename => attachment.filename }, :class => 'lightbox', :rel => 'attachments', :title => "#{attachment.filename}#{ ('-' + attachment.description) unless attachment.description.blank? }" %>
-		<% end -%>
-	</div>
+  <div class='images'>
+    <% images.each do |attachment| %>
+      <%= link_to image_tag(url_for({:controller => 'attachments', :action => 'show', :id => attachment, :filename => attachment.filename }), :width => '180'),
+      {:controller => 'attachments', :action => 'show', :id => attachment, :filename => attachment.filename }, :class => 'lightbox', :rel => 'attachments', :title => "#{attachment.filename}#{ ('-' + attachment.description) unless attachment.description.blank? }" %>
+    <% end -%>
+  </div>
 <% end -%>
+
 </div>
 
