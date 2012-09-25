@@ -1,6 +1,6 @@
 require 'redmine'
 
-require_dependency 'hooks/view_layouts_base_html_head_hook'
+require_dependency 'redmine_lightbox/hooks/view_layouts_base_html_head_hook'
 
 Redmine::Plugin.register :redmine_lightbox do
   name 'Redmine Light Box plugin'
