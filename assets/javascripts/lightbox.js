@@ -15,6 +15,7 @@
         'width': '100%', // or whatever
         'height': '100%',
         'autoDimensions': false,
+        'showNavArrows': false,
         'onClosed': function() {
           $("#fancybox-inner").empty();
         }
