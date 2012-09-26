@@ -23,7 +23,7 @@
     $("div.attachments a.pdf").each(function() {
        if(is_chrome()) {
          var inline_link = this.href.replace(/\/attachments\//, "/attachments/download_inline/");
-         options.content = '<div class="chrome_container"><iframe src="' + inline_link + '" class="chrome"></iframe></div>';
+         options.content = '<embed src="' + inline_link + '" type="application/pdf" class="chrome"/>';
        }
        else {
          options.content = '<embed src="' + this.href + '#nameddest=self&page=1&view=FitH, 0&zoom=80,0,0" type="application/pdf" height="100%" width="100%" />';

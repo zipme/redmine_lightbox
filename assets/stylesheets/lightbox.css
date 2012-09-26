@@ -16,11 +16,9 @@ a.pdf img, a.swf img
   width: 18px;
 }
 
-.chrome_container {
-  padding: 3em;
-}
-
-.chrome_container .chrome {
+embed.chrome {
+  box-sizing: border-box;
   width: 100%;
   height: 100%;
+  padding: 30px;
 }
