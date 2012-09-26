@@ -9,4 +9,10 @@ Redmine::Plugin.register :redmine_lightbox do
   version '0.0.1'
   url 'https://github.com/zipme/redmine_lightbox'
   author_url 'https://github.com/zipme/redmine_lightbox'
+
+  default_settings = {
+    'preview_image_attachments' => true
+  }
+
+  settings(:default => default_settings, :partial => 'settings/settings')
 end

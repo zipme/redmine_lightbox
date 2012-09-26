@@ -5,12 +5,20 @@ div.attachments div.images
     margin: 10px;
     display: inline-block;
 }
+
+div.attachments .image_attachment_preview {
+    width: auto !important;
+    width: 180px;
+    max-width: 180px;
+    max-height: 200px;
+}
+
 div.attachments div.images a.lightbox
 {
   margin: 0px 5px;
 }
 
-a.pdf img, a.swf img
+div.attachments img.preview_button
 {
   margin: 0 4px;
   width: 18px;

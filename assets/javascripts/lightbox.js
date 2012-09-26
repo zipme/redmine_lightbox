@@ -8,7 +8,7 @@
     		'speedOut'		:	200
   		}
 
-    $("div.attachments a.lightbox, div.attachments a.swf").fancybox(options);
+    $("div.attachments a.lightbox, div.attachments a.swf, div.attachments a.image").fancybox(options);
     $.extend(
       options,
       {
