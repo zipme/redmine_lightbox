@@ -14,5 +14,5 @@ Redmine::Plugin.register :redmine_lightbox do
     'preview_image_attachments' => true
   }
 
-  settings(:default => default_settings, :partial => 'settings/settings')
+  settings(:default => default_settings, :partial => 'settings/lightbox_settings')
 end
