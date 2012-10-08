@@ -10,6 +10,7 @@ module RedmineLightbox
           return stylesheet_link_tag("jquery.fancybox-1.3.4.css", :plugin => "redmine_lightbox", :media => "screen") \
             + stylesheet_link_tag("lightbox.css", :plugin => "redmine_lightbox", :media => "screen") \
             + javascript_include_tag('jquery_loader.js', :plugin => 'redmine_lightbox') \
+            + javascript_tag("jQuery.noConflict()") \
             + javascript_include_tag('jquery.fancybox-1.3.4.pack.js', :plugin => 'redmine_lightbox') \
             + javascript_include_tag('jquery.easing-1.3.pack.js', :plugin => 'redmine_lightbox') \
             + javascript_include_tag('lightbox.js', :plugin => 'redmine_lightbox') \
