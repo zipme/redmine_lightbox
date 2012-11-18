@@ -1,7 +1,9 @@
 require 'redmine'
 
 require_dependency 'redmine_lightbox/hooks/view_layouts_base_html_head_hook'
-
+require_dependency 'redmine_lightbox/services/document_converter'
+require_dependency 'redmine_lightbox/patches/attachment_patch'
+require_dependency 'redmine_lightbox/patches/attachments_controller_patch'
 Redmine::Plugin.register :redmine_lightbox do
   name 'Redmine Light Box plugin'
   author 'G.K.'

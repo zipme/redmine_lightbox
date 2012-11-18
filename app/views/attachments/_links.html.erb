@@ -11,6 +11,11 @@
   <% if (!Setting.plugin_redmine_lightbox['preview_image_attachments'] && attachment.image?) || (attachment.filename =~ /.(pdf|swf)$/i ) %>
     <%= link_to image_tag('preview.png', :plugin => :redmine_lightbox, :class => "preview_button"), {:controller => 'attachments', :action => "#{($1 === 'swf' || attachment.image?) ? 'download_inline' : 'show'}", :id => attachment, :filename => attachment.filename }, :class => $1 || "image", :rel => 'attachments', :title => "#{attachment.filename}#{ ('-' + attachment.description) unless attachment.description.blank? }" %>
   <% end -%>
+
+  <% if attachment.attachment_preview %>
+    <%= link_to image_tag('preview.png', :plugin => :redmine_lightbox, :class => "preview_button"), {:controller => 'attachments', :action => 'preview', :id => attachment, :filename => attachment.filename }, :class => "attachment_preview", :rel => 'attachments', :title => "#{attachment.filename}#{ ('-' + attachment.description) unless attachment.description.blank? }" %>
+  <% end %>
+  
   <% if options[:deletable] %>
     <%= link_to image_tag('delete.png'), attachment_path(attachment),
                                          :confirm => l(:text_are_you_sure),
@@ -33,7 +38,7 @@
         {:controller => 'attachments', :action => 'show', :id => attachment, :filename => attachment.filename }, :class => 'lightbox', :rel => 'attachments', :title => "#{attachment.filename}#{ ('-' + attachment.description) unless attachment.description.blank? }" %>
       <% end -%>
     </div>
-  <% end -%>
+  <% end %>
 <% end %>
 
 </div>

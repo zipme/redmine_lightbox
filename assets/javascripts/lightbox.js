@@ -8,7 +8,7 @@
     		'speedOut'		:	200
   		}
 
-    $("div.attachments a.lightbox, div.attachments a.swf, div.attachments a.image").fancybox(options);
+    $("div.attachments a.lightbox, div.attachments a.swf, div.attachments a.image, div.attachments a.attachment_preview").fancybox(options);
     $.extend(
       options,
       {
@@ -17,23 +17,44 @@
         'autoDimensions': false,
         'showNavArrows': false,
         'onClosed': function() {
-          $("#fancybox-inner").empty();
+          $("#fancybox-inner").empty()
         }
       }
     )
+
     $("div.attachments a.pdf").each(function() {
-       if(is_chrome()) {
-         var inline_link = this.href.replace(/\/attachments\//, "/attachments/download_inline/");
-         options.content = '<embed src="' + inline_link + '" type="application/pdf" class="chrome"/>';
-       }
-       else {
-         options.content = '<embed src="' + this.href + '#nameddest=self&page=1&view=FitH, 0&zoom=80,0,0" type="application/pdf" height="100%" width="100%" />';
-       }
-       $(this).fancybox(options);
+      if(is_chrome()) {
+        var inline_link = this.href.replace(/\/attachments\//, "/attachments/download_inline/")
+        options.content = embed_chrome_pdf(inline_link)
+      }
+      else {
+        options.content = embed_pdf(this.href)
+      }
+      $(this).fancybox(options)
     })
+
+    $("div.attachments a.attachment_preview").each(function() {
+      if(is_chrome()) {
+        var inline_link = this.href.replace(/\/preview\//, "/preview_inline/")
+        options.content = embed_chrome_pdf(inline_link)
+      }
+      else {
+        options.content = embed_pdf(this.href)
+      }
+      $(this).fancybox(options)
+    })
+
 
     function is_chrome() {
       return navigator.userAgent.indexOf("Chrome") >= -1
+    }
+
+    function embed_chrome_pdf(document_url) {
+      return '<embed src="' + document_url + '" type="application/pdf" class="chrome"/>'
+    }
+
+    function embed_pdf(document_url) {
+      return '<embed src="' + document_url + '#nameddest=self&page=1&view=FitH, 0&zoom=80,0,0" type="application/pdf" height="100%" width="100%" />'
     }
 
   })

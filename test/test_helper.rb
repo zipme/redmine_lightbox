@@ -1,5 +1,7 @@
 # Load the normal Rails helper
-require File.expand_path(File.dirname(__FILE__) + '/../../../../test/test_helper')
+helper_path = File.expand_path(File.dirname(__FILE__) + '/../../../test/test_helper')
+if !File.exists?(helper_path)
+  helper_path = File.expand_path(File.dirname(__FILE__) + '/../../../../test/test_helper')
+end
 
-# Ensure that we are using the temporary fixture path
-Engines::Testing.set_fixture_path
+require helper_path

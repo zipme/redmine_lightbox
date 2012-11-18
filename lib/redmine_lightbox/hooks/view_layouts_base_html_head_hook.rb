@@ -7,10 +7,17 @@ module RedmineLightbox
                                       context[:controller].is_a?(DocumentsController) ||
                                       context[:controller].is_a?(FilesController) ||
                                       context[:controller].is_a?(BoardsController))
+
+          if Redmine::VERSION.to_s.slice(0, 3) < "2.1"
+            jquery_include = javascript_include_tag('jquery_loader.js', :plugin => 'redmine_lightbox') \
+              + javascript_tag("jQuery.noConflict()")
+          else
+            jquery_include = ""
+          end
+
           return stylesheet_link_tag("jquery.fancybox-1.3.4.css", :plugin => "redmine_lightbox", :media => "screen") \
             + stylesheet_link_tag("lightbox.css", :plugin => "redmine_lightbox", :media => "screen") \
-            + javascript_include_tag('jquery_loader.js', :plugin => 'redmine_lightbox') \
-            + javascript_tag("jQuery.noConflict()") \
+            + jquery_include \
             + javascript_include_tag('jquery.fancybox-1.3.4.pack.js', :plugin => 'redmine_lightbox') \
             + javascript_include_tag('jquery.easing-1.3.pack.js', :plugin => 'redmine_lightbox') \
             + javascript_include_tag('lightbox.js', :plugin => 'redmine_lightbox') \
