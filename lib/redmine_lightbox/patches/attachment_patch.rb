@@ -29,7 +29,7 @@ module RedmineLightbox
 
       private
         def preview_format
-          attachment_format = filename.rpartition(".")[2]
+          attachment_format = filename.rpartition(".")[2].downcase
           preview_format = PREVIEW_TRANSFORMATIONS[attachment_format]
         end
 
