@@ -5,7 +5,8 @@ module RedmineLightbox
     module AttachmentPatch
       PREVIEW_TRANSFORMATIONS = {
         'doc' => 'pdf',
-        'docx' => 'pdf'
+        'docx' => 'pdf',
+        'rtf' => 'pdf'
       }
 
       class << self
