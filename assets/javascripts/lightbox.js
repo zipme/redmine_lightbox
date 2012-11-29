@@ -8,7 +8,7 @@
     		'speedOut'		:	200
   		}
 
-    $("div.attachments a.lightbox, div.attachments a.swf, div.attachments a.image, div.attachments a.attachment_preview").fancybox(options);
+    $("div.attachments a.lightbox, div.attachments a.swf, div.attachments a.image, div.attachments a.attachment_preview, ul.details a.swf, ul.details a.image, ul.details a.attachment_preview").fancybox(options)
     $.extend(
       options,
       {
@@ -22,7 +22,7 @@
       }
     )
 
-    $("div.attachments a.pdf").each(function() {
+    $("div.attachments a.pdf, ul.details a.pdf").each(function() {
       if(is_chrome()) {
         var inline_link = this.href.replace(/\/attachments\//, "/attachments/download_inline/")
         options.content = embed_chrome_pdf(inline_link)
@@ -33,7 +33,7 @@
       $(this).fancybox(options)
     })
 
-    $("div.attachments a.attachment_preview").each(function() {
+    $("div.attachments a.attachment_preview, ul.details a.attachment_preview").each(function() {
       if(is_chrome()) {
         var inline_link = this.href.replace(/\/preview\//, "/preview_inline/")
         options.content = embed_chrome_pdf(inline_link)
