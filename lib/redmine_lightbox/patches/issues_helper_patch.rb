@@ -5,7 +5,8 @@ module RedmineLightbox
     module IssuesHelperPatch
 
       def link_to_attachment_with_preview(attachment, options = {})
-        preview_button = image_tag('preview.png', :plugin => :redmine_lightbox, :class => "preview_button")
+        preview_icon = absolute_url(image_path('preview.png', :plugin => :redmine_lightbox))
+        preview_button = image_tag(preview_icon, :class => "preview_button")
 
         download_link = link_to_attachment_without_preview(attachment)
 
@@ -21,6 +22,12 @@ module RedmineLightbox
       end
 
       private
+
+        def absolute_url(relative_url)
+          "#{home_url}#{relative_url}"
+        end
+
+
         def preview_link_with(attachment, preview_button)
           if attachment.attachment_preview
             link_class = "attachment_preview"
@@ -41,7 +48,7 @@ module RedmineLightbox
           end
 
           if attachment.is_text?
-            link_to(image_tag('magnifier.png'),
+            link_to(image_tag(absolute_url(image_path('magnifier.png'))),
               :controller => 'attachments', 
               :action => 'show',
               :id => attachment,
