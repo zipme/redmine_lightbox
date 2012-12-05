@@ -8,7 +8,7 @@ module RedmineLightbox
         preview_icon = absolute_url(image_path('preview.png', :plugin => :redmine_lightbox))
         preview_button = image_tag(preview_icon, :class => "preview_button")
 
-        download_link = link_to_attachment_without_preview(attachment)
+        download_link = link_to_attachment_without_preview(attachment, :only_path => false)
 
         if attachment.image? && Setting.plugin_redmine_lightbox['preview_image_attachments']
           download_link
@@ -24,9 +24,8 @@ module RedmineLightbox
       private
 
         def absolute_url(relative_url)
-          "#{home_url}#{relative_url}"
+          "#{home_url}#{relative_url[1..-1]}"
         end
-
 
         def preview_link_with(attachment, preview_button)
           if attachment.attachment_preview
@@ -52,13 +51,15 @@ module RedmineLightbox
               :controller => 'attachments', 
               :action => 'show',
               :id => attachment,
-              :filename => attachment.filename)
+              :filename => attachment.filename,
+              :only_path => false)
           else
             link_to(preview_button, {
               :controller => 'attachments',
               :action => attachment_action,
               :id => attachment,
-              :filename => attachment.filename },
+              :filename => attachment.filename,
+              :only_path => false },
               :class => link_class,
               :rel => 'attachments',
               :title => attachment_title
