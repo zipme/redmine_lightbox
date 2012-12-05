@@ -12,7 +12,11 @@ module RedmineLightbox
         if attachment.image? && Setting.plugin_redmine_lightbox['preview_image_attachments']
           download_link
         else
-          "#{download_link} #{preview_link_with(attachment, preview_button)}"
+          if @controller.is_a?(IssuesController)
+            "#{download_link} #{preview_link_with(attachment, preview_button)}"
+          else
+            download_link
+          end
         end
       end
 
