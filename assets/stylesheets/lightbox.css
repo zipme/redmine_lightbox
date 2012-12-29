@@ -1,17 +1,18 @@
-div.attachments div.images
-{
-    border: 1px solid #CCCCCC;
-    padding: 10px;
-    margin: 10px;
-    display: inline-block;
+div.attachments .image_attachment_preview {
+    width: auto !important;
+    width: 180px;
+    max-width: 180px;
+    max-height: 200px;
 }
+
 div.attachments div.images a.lightbox
 {
   margin: 0px 5px;
 }
 
-a.pdf img, a.swf img
-{
-  margin: 0 4px;
-  width: 18px;
+embed.chrome {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 30px;
 }
