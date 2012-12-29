@@ -1,11 +1,3 @@
-div.attachments div.images
-{
-    border: 1px solid #CCCCCC;
-    padding: 10px;
-    margin: 10px;
-    display: inline-block;
-}
-
 div.attachments .image_attachment_preview {
     width: auto !important;
     width: 180px;
@@ -16,12 +8,6 @@ div.attachments .image_attachment_preview {
 div.attachments div.images a.lightbox
 {
   margin: 0px 5px;
-}
-
-div.attachments img.preview_button, .journal img.preview_button
-{
-  margin: 0 4px;
-  width: 18px;
 }
 
 embed.chrome {
