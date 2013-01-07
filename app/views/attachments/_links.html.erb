@@ -26,7 +26,7 @@
 <% if defined?(thumbnails) && thumbnails %>
   <% images = attachments.select(&:thumbnailable?) %>
   <% if images.any? %>
-  <div class="thumbnails">
+  <div class="thumbnails images">
     <% images.each do |attachment| %>
       <div>
         <%=
