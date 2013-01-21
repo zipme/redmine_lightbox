@@ -9,8 +9,10 @@ module RedmineLightBox
                                       context[:controller].is_a?(BoardsController))
           return stylesheet_link_tag("jquery.fancybox-1.3.4.css", :plugin => "redmine_lightbox", :media => "screen") +
             stylesheet_link_tag("lightbox.css", :plugin => "redmine_lightbox", :media => "screen") +
-            javascript_include_tag('//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js') +
-            javascript_tag('jQuery.noConflict();') +
+            ((Redmine::VERSION::ARRAY <=> [2,1,0]) < 0 ?
+              javascript_include_tag('//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js') +
+              javascript_tag('jQuery.noConflict();')
+            : '' ) +
             javascript_include_tag('jquery.fancybox-1.3.4.pack.js', :plugin => 'redmine_lightbox') +
             javascript_include_tag('jquery.easing-1.3.pack.js', :plugin => 'redmine_lightbox') +            
             javascript_include_tag('lightbox.js', :plugin => 'redmine_lightbox')
