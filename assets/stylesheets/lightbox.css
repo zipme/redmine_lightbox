@@ -1,9 +1,13 @@
 div.attachments div.images
 {
-    border: 1px solid #CCCCCC;
-    padding: 10px;
-    margin: 10px;
-    display: inline-block;
+  border: 1px solid #CCCCCC;
+	padding: 10px 10px 0 10px;
+	margin:  10px;
+	display: inline-block;
+}
+div.attachments div.images > div
+{
+	margin-bottom: 10px;
 }
 div.attachments div.images a.lightbox
 {
