@@ -16,6 +16,11 @@ module RedmineLightbox
         raw("#{download_link} #{preview_link_with(attachment, preview_button)}")
       end
 
+      def thumbnail_with_preview_tag(attachment)
+        preview_link_with(attachment,
+           image_tag(url_for(:controller => 'attachments', :action => 'thumbnail', :id => attachment)))
+      end
+
       def show_detail_with_only_path_disabled(detail, no_html = false, options={})
         show_detail_without_only_path_disabled(detail, no_html, options.merge(:only_path => false))
       end
