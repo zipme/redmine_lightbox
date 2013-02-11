@@ -8,7 +8,9 @@ module RedmineLightbox
       end
 
       def convert(filename)
-        system "#{CONVERTER} -f #{@output_format} #{filename}"
+        if filename.present? && File.exist?(filename)
+          system "#{CONVERTER} -f #{@output_format} #{filename}"
+        end
       end
 
       class << self
