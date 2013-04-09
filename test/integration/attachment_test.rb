@@ -23,14 +23,8 @@ class AttachmentTest < ActionController::IntegrationTest
     assert_response :success
   end
 
-  def test_should_get_preview
-    path = "/attachments/preview/#{@some_file.id}/#{@some_file.filename}"
-    get_via_redirect(path)
-    assert_response :success
-  end
-
-  def test_should_get_preview_inline
-    path = "/attachments/preview_inline/#{@some_file.id}/#{@some_file.filename}"
+  def test_should_get_by_id
+    path = "/attachments/#{@some_file.id}/#{@some_file.filename}"
     get_via_redirect(path)
     assert_response :success
   end

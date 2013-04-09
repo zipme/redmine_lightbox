@@ -1,16 +1,16 @@
 require 'redmine'
 
-require_dependency 'redmine_lightbox/hooks/view_layouts_base_html_head_hook'
-require_dependency 'redmine_lightbox/services/document_converter'
-require_dependency 'redmine_lightbox/patches/attachment_patch'
-require_dependency 'redmine_lightbox/patches/attachments_controller_patch'
-require_dependency 'redmine_lightbox/patches/issues_helper_patch'
+Rails.configuration.to_prepare do
+  require 'redmine_lightbox'
+end
 
 Redmine::Plugin.register :redmine_lightbox do
   name 'Redmine Light Box plugin'
-  author 'G.K.'
+  author 'G.K., Undev'
   description 'Lightbox for attachments'
-  version '0.0.1'
-  url 'https://github.com/zipme/redmine_lightbox'
-  author_url 'https://github.com/zipme/redmine_lightbox'
+  version '0.0.2'
+  url 'https://github.com/Undev/redmine_lightbox'
+  author_url 'https://github.com/Undev'
+
+  requires_redmine :version_or_higher => '2.1'
 end

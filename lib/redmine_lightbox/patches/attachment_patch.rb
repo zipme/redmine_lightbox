@@ -3,22 +3,22 @@ require_dependency 'attachment'
 module RedmineLightbox
   module Patches
     module AttachmentPatch
-      PREVIEW_TRANSFORMATIONS = {
-        'doc' => 'pdf',
-        'docx' => 'pdf',
-        'rtf' => 'pdf'
-      }
+      extend ActiveSupport::Concern
 
-      class << self
-        def included(base)
-          base.class_eval do
-            has_one :attachment_preview, :dependent => :destroy
+      included do
 
-            after_save :generate_preview
-          end
-        end
+        PREVIEW_TRANSFORMATIONS = {
+          'doc' => 'pdf',
+          'docx' => 'pdf',
+          'rtf' => 'pdf'
+        }
+
+        has_one :attachment_preview, :dependent => :destroy
+
+        after_save :generate_preview
       end
-      
+
+
       def try_to_generate_preview
         format = preview_format
         if format && !attachment_preview
@@ -29,17 +29,20 @@ module RedmineLightbox
       end
 
       private
-        def preview_format
-          attachment_format = filename.rpartition(".")[2].downcase
-          preview_format = PREVIEW_TRANSFORMATIONS[attachment_format]
-        end
 
-        def generate_preview
-          try_to_generate_preview
-          true
-        end
+      def preview_format
+        attachment_format = filename.rpartition(".")[2].downcase
+        preview_format = PREVIEW_TRANSFORMATIONS[attachment_format]
+      end
+
+      def generate_preview
+        try_to_generate_preview
+        true
+      end
     end
   end
 end
 
-Attachment.send(:include, RedmineLightbox::Patches::AttachmentPatch)
+unless Attachment.included_modules.include?(RedmineLightbox::Patches::AttachmentPatch)
+  Attachment.send(:include, RedmineLightbox::Patches::AttachmentPatch)
+end
