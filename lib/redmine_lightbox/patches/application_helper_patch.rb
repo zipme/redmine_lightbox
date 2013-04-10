@@ -1,4 +1,4 @@
-require_dependency 'application_helper'
+require 'application_helper'
 
 module RedmineLightbox
   module Patches
@@ -9,7 +9,6 @@ module RedmineLightbox
         include RedmineLightboxHelper
         alias_method_chain :link_to_attachment, :preview
       end
-
     end
   end
 end

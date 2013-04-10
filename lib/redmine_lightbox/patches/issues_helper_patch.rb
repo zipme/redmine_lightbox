@@ -1,4 +1,4 @@
-require_dependency 'issues_helper'
+require 'issues_helper'
 
 module RedmineLightbox
   module Patches

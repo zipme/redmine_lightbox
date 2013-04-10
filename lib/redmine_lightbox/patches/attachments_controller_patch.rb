@@ -1,4 +1,4 @@
-require_dependency 'attachments_controller'
+require 'attachments_controller'
 
 module RedmineLightbox
   module Patches
@@ -7,8 +7,6 @@ module RedmineLightbox
 
       included do
         before_filter :file_readable, :read_authorize, :only => [:show, :download, :download_inline, :preview, :preview_inline]
-
-        helper :redmine_lightbox
       end
 
       def preview

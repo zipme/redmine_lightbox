@@ -1,4 +1,4 @@
-require_dependency 'attachment'
+require 'attachment'
 
 module RedmineLightbox
   module Patches
