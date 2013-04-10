@@ -33,6 +33,17 @@ $('document').ready(function() {
     $(this).fancybox(options)
   });
 
+  $("div.attachments a.attachment_preview, ul.details a.attachment_preview").each(function() {
+    if(is_chrome()) {
+      var inline_link = this.href.replace(/\/preview\//, "/preview_inline/");
+      options.content = embed_chrome_pdf(inline_link)
+    }
+    else {
+      options.content = embed_pdf(this.href)
+    }
+    $(this).fancybox(options)
+  });
+
   function is_chrome() {
     return navigator.userAgent.indexOf("Chrome") >= -1
   }

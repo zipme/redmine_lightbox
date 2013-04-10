@@ -45,7 +45,7 @@ module RedmineLightboxHelper
   def preview_link_with(attachment, preview_button)
     if attachment.attachment_preview
       link_class = "attachment_preview"
-      attachment_action = "download_inline"
+      attachment_action = "preview"
     else
       if attachment.filename =~ /.(pdf|swf)$/i
         link_class = $1
