@@ -7,6 +7,7 @@ require 'redmine_lightbox/patches/attachments_controller_patch'
 require 'redmine_lightbox/patches/application_helper_patch'
 require 'redmine_lightbox/patches/issues_helper_patch'
 require 'redmine_lightbox/patches/wiki_helper_patch'
+require 'redmine_lightbox/patches/documents_helper_patch'
 
 Redmine::Plugin.register :redmine_lightbox do
   name 'Redmine Light Box plugin'
