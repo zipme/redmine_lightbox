@@ -1,4 +1,4 @@
-require_dependency 'attachment'
+require 'attachment'
 
 module RedmineLightbox
   module Patches
@@ -6,6 +6,7 @@ module RedmineLightbox
       extend ActiveSupport::Concern
 
       included do
+
         PREVIEW_TRANSFORMATIONS = {
           'doc' => 'pdf',
           'docx' => 'pdf',
@@ -16,6 +17,7 @@ module RedmineLightbox
 
         after_save :generate_preview
       end
+
 
       def try_to_generate_preview
         format = preview_format
