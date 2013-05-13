@@ -6,7 +6,11 @@ $('document').ready(function() {
       'speedOut'		  :	200
     };
 
-  $("div.attachments a.lightbox, div.attachments a.swf, div.attachments a.image, div.attachments a.attachment_preview, ul.details a.swf, ul.details a.image, ul.details a.attachment_preview")
+  $("div.attachments div.thumbnails a").attr("rel", "attachments");
+
+  $("div.attachments a.lightbox, div.attachments a.swf, div.attachments a.image, " +
+    "div.attachments a.attachment_preview, ul.details a.swf, ul.details a.image, " +
+    "ul.details a.attachment_preview, div.attachments div.thumbnails a")
     .fancybox(options);
 
   $.extend(
