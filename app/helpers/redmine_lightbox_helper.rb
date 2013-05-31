@@ -1,19 +1,18 @@
 module RedmineLightboxHelper
 
   def link_to_attachment_with_preview(attachment, options = {})
+    original_link = link_to_attachment_without_preview(attachment, options)
+
+    return original_link unless preview_available?(attachment)
+
     #TODO: remove this shit after the best way will be found
     self.class.send(:include, RedmineLightboxHelper) unless self.methods.include?(:absolute_asset_url)
 
     preview_icon = absolute_asset_url('images/preview.png')
-    icon_style = "width: 18px; margin: 0px 4px"
+    icon_style = 'width: 18px; margin: 0px 4px'
     preview_button = image_tag(preview_icon, :style => icon_style)
 
-    unless preview_available?(attachment)
-      return link_to_attachment_without_preview(attachment, options)
-    end
-
-    download_link = link_to_attachment_without_preview(attachment, :only_path => false)
-    raw("#{download_link} #{preview_link_with(attachment, preview_button)}")
+    raw("#{original_link} #{preview_link_with(attachment, preview_button)}")
   end
 
   def thumbnail_with_preview_tag(attachment)
@@ -39,14 +38,14 @@ module RedmineLightboxHelper
   def preview_available?(attachment)
     image = attachment.image?
     pdf_or_swf = attachment.filename =~ /.(pdf|swf)$/i
-    attachment_preview = attachment.attachment_preview
+    attachment_preview = attachment.transformed_preview
     text = attachment.is_text?
 
     image || text || pdf_or_swf || attachment_preview
   end
 
   def preview_link_with(attachment, preview_button)
-    if attachment.attachment_preview
+    if attachment.transformed_preview
       link_class = "attachment_preview"
       attachment_action = "preview"
     else

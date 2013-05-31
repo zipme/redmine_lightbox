@@ -28,6 +28,11 @@ module RedmineLightbox
         end
       end
 
+      def transformed_preview
+        try_to_generate_preview
+        attachment_preview
+      end
+
       private
 
       def preview_format

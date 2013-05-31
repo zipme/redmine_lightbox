@@ -1,6 +1,8 @@
 class AttachmentPreview < ActiveRecord::Base
   belongs_to :attachment
 
+  validates :attachment, :presence => true
+
   before_save :create_preview
 
   after_destroy :delete_from_disk!
@@ -20,14 +22,15 @@ class AttachmentPreview < ActiveRecord::Base
   end
 
   private
-    def delete_from_disk!
-      if diskfile.present? && File.exist?(diskfile)
-        File.delete diskfile
-      end
-    end
 
-    def create_preview
-      preview_service = RedmineLightbox::Services::DocumentConverter.new(file_type)
-      preview_service.convert(attachment.diskfile)
+  def delete_from_disk!
+    if diskfile.present? && File.exist?(diskfile)
+      File.delete diskfile
     end
+  end
+
+  def create_preview
+    preview_service = RedmineLightbox::Services::DocumentConverter.new(file_type)
+    preview_service.convert(attachment.diskfile)
+  end
 end

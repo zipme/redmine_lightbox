@@ -8,7 +8,7 @@ Redmine::Plugin.register :redmine_lightbox do
   name 'Redmine Light Box plugin'
   author 'G.K., Undev'
   description 'Lightbox for attachments'
-  version '0.0.6'
+  version '0.0.7'
   url 'https://github.com/Undev/redmine_lightbox'
   author_url 'https://github.com/Undev'
 

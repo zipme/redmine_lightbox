@@ -28,4 +28,8 @@ class AttachmentTest < ActionController::IntegrationTest
     get_via_redirect(path)
     assert_response :success
   end
+
+  def test_download_button
+
+  end
 end
