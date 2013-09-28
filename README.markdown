@@ -1,6 +1,9 @@
 Redmine Lightbox plugin
 =======================
 
+[![Build Status](https://travis-ci.org/Undev/redmine_lightbox.png?branch=master)](https://travis-ci.org/Undev/redmine_lightbox)
+[![Code Climate](https://codeclimate.com/github/Undev/redmine_lightbox.png)](https://codeclimate.com/github/Undev/redmine_lightbox)
+
 This plugin lets you preview the image, pdf and swf attachments in a lightbox.
 
 Screenshots
