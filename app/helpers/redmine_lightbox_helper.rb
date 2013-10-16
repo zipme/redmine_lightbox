@@ -12,7 +12,7 @@ module RedmineLightboxHelper
     icon_style = 'width: 18px; margin: 0px 4px'
     preview_button = image_tag(preview_icon, :style => icon_style)
 
-    raw("#{original_link} #{preview_link_with(attachment, preview_button)}")
+    raw("#{original_link}#{preview_link_with(attachment, preview_button)}")
   end
 
   def thumbnail_with_preview_tag(attachment)
