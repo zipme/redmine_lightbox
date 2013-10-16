@@ -7,3 +7,7 @@ require 'redmine_lightbox/patches/attachments_controller_patch'
 require 'redmine_lightbox/patches/documents_helper_patch'
 require 'redmine_lightbox/services/document_converter'
 
+if Rails.env == 'test'
+  # This plugin change redmine functionality so tests should be changed too
+  require 'redmine_lightbox/patches/application_helper_test_patch.rb'
+end
