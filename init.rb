@@ -1,7 +1,7 @@
 require 'redmine'
 
 Rails.configuration.to_prepare do
-  require 'lib/workers/document_converter'
+  require 'workers/document_converter'
   require 'redmine_lightbox'
 end
 
