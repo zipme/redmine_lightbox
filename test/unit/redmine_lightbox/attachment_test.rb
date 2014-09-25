@@ -30,6 +30,20 @@ class RedmineLightbox::AttachmentTest < ActiveSupport::TestCase
       assert File.exists?(preview.diskfile)
     end
 
+    def test_has_preview_with_attachment_preview
+      attachment = create_document_attachment
+      preview = attachment.transformed_preview
+      assert preview
+      assert attachment.has_transformed_preview?
+    end
+
+    def test_has_preview_without_attachment_preview
+      attachment = Attachment.find(16)
+      preview = attachment.transformed_preview
+      assert_nil preview
+      refute attachment.has_transformed_preview?
+    end
+
   else
     puts '(document converter not available)'
   end

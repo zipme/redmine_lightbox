@@ -20,11 +20,11 @@ module RedmineLightbox
 
 
       def try_to_generate_preview
-        format = preview_format
-        if format && !attachment_preview
-          create_attachment_preview(:file_type => format)
+        return if preview_format.nil? || has_transformed_preview?
+        if attachment_preview
+          attachment_preview.create_preview
         else
-          false
+          create_attachment_preview(:file_type => preview_format)
         end
       end
 
@@ -33,11 +33,14 @@ module RedmineLightbox
         attachment_preview
       end
 
+      def has_transformed_preview?
+        attachment_preview && attachment_preview.file_exists?
+      end
+
       private
 
       def preview_format
-        attachment_format = filename.rpartition(".")[2].downcase
-        preview_format = PREVIEW_TRANSFORMATIONS[attachment_format]
+        @preview_format ||= PREVIEW_TRANSFORMATIONS[filename.rpartition(".")[2].downcase]
       end
 
       def generate_preview

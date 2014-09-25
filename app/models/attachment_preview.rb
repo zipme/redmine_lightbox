@@ -21,16 +21,17 @@ class AttachmentPreview < ActiveRecord::Base
     RedmineLightbox::Services::DocumentConverter::preview_filename_for(source, file_type)
   end
 
-  private
-
-  def delete_from_disk!
-    if diskfile.present? && File.exist?(diskfile)
-      File.delete diskfile
-    end
+  def file_exists?
+    diskfile.present? && File.exist?(diskfile)
   end
 
   def create_preview
-    preview_service = RedmineLightbox::Services::DocumentConverter.new(file_type)
-    preview_service.convert(attachment.diskfile)
+    Workers::DocumentConverter.defer(attachment.diskfile, file_type)
+  end
+
+  private
+
+  def delete_from_disk!
+    File.delete(diskfile) if file_exists?
   end
 end
