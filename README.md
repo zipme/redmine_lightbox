@@ -5,8 +5,6 @@
 
 This plugin enables you to preview the files attached to issues in Redmine. The plugin currently supports various image (.png, .jpg, .gif, .swf, etc.) and document (,pdf, .docx, .doc, .rtf) formats.
 
-The initial author is [Genki Zhang](https://github.com/zipme/redmine_lightbox).
-
 ## Compatibility
 
 This plugin version is compatible only with Redmine 2.1.x and later.
