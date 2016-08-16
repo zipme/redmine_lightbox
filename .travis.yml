@@ -5,48 +5,35 @@ services:
   - postgresql
 
 rvm:
-  - 1.9.3
-  - 2.0.0
+  - 2.2.0
 
 gemfile:
   - $REDMINE_PATH/Gemfile
 
 env:
-  - REDMINE_VER=2.1.6 DB=mysql
-  - REDMINE_VER=2.2.4 DB=mysql
-  - REDMINE_VER=2.3.3 DB=mysql
-  - REDMINE_VER=2.1.6 DB=postgresql
-  - REDMINE_VER=2.2.4 DB=postgresql
-  - REDMINE_VER=2.3.3 DB=postgresql
-
-matrix:
-  exclude:
-    - rvm: 2.0.0
-      env: REDMINE_VER=2.1.6 DB=mysql
-      gemfile: $REDMINE_PATH/Gemfile
-    - rvm: 2.0.0
-      env: REDMINE_VER=2.2.4 DB=mysql
-      gemfile: $REDMINE_PATH/Gemfile
-    - rvm: 2.0.0
-      env: REDMINE_VER=2.1.6 DB=postgresql
-      gemfile: $REDMINE_PATH/Gemfile
-    - rvm: 2.0.0
-      env: REDMINE_VER=2.2.4 DB=postgresql
-      gemfile: $REDMINE_PATH/Gemfile
+  - REDMINE_VER=2.6.9 DB=mysql
+  - REDMINE_VER=3.1.6 DB=mysql
+  - REDMINE_VER=3.2.3 DB=mysql
+  - REDMINE_VER=3.3.0 DB=mysql
+  - REDMINE_VER=2.6.9 DB=postgresql
+  - REDMINE_VER=3.1.6 DB=postgresql
+  - REDMINE_VER=3.2.3 DB=postgresql
+  - REDMINE_VER=3.3.0 DB=postgresql
 
 before_install:
   - export PLUGIN_NAME=redmine_lightbox
   - export REDMINE_PATH=$HOME/redmine
-  - git clone --depth=1 --branch=$REDMINE_VER https://github.com/redmine/redmine.git $REDMINE_PATH
+  - export RAILS_ENV=test
+  - svn co http://svn.redmine.org/redmine/tags/$REDMINE_VER $REDMINE_PATH
   - ln -s $TRAVIS_BUILD_DIR $REDMINE_PATH/plugins/$PLUGIN_NAME
   - cp config/database-$DB-travis.yml $REDMINE_PATH/config/database.yml
   - cd $REDMINE_PATH
 
 before_script:
-  - rake db:create
-  - rake db:migrate
-  - rake redmine:plugins:migrate
+  - bundle exec rake db:create
+  - bundle exec rake db:migrate
+  - bundle exec rake redmine:plugins:migrate
 
 script:
-  - rake redmine:plugins:test NAME=$PLUGIN_NAME
+  - bundle exec rake redmine:plugins:test NAME=$PLUGIN_NAME RUBYOPT="-W0"
 

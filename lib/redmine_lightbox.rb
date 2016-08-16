@@ -1,17 +1,18 @@
 module RedmineLightbox
-  DEFER_CONVERT = Rails.env != 'test' && defined?(Resque)
+  DEFER_CONVERT = defined?(Resque)
 end
 
-require 'redmine_lightbox/patches/application_helper_patch'
-require 'redmine_lightbox/patches/issues_helper_patch'
+ActionDispatch::Callbacks.to_prepare do
 
-require 'redmine_lightbox/hooks/view_layouts_base_html_head_hook'
-require 'redmine_lightbox/patches/attachment_patch'
-require 'redmine_lightbox/patches/attachments_controller_patch'
-require 'redmine_lightbox/patches/documents_helper_patch'
-require 'redmine_lightbox/services/document_converter'
+  # Patches
+  require 'redmine_lightbox/patches/attachment_patch'
+  require 'redmine_lightbox/patches/application_controller_patch'
+  require 'redmine_lightbox/patches/attachments_controller_patch'
 
-if Rails.env == 'test'
-  # This plugin change redmine functionality so tests should be changed too
-  require 'redmine_lightbox/patches/application_helper_test_patch.rb'
+  # Redmine hooks
+  require 'redmine_lightbox/hooks/view_hooks'
+
+  # Converter
+  require_dependency 'workers/document_converter'
+  require_dependency 'redmine_lightbox/services/document_converter'
 end

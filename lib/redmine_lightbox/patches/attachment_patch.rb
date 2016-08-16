@@ -1,4 +1,4 @@
-require 'attachment'
+require_dependency 'attachment'
 
 module RedmineLightbox
   module Patches
@@ -6,47 +6,33 @@ module RedmineLightbox
       extend ActiveSupport::Concern
 
       included do
+        PDF_PREVIEW_ALLOWED_FOR = %w(doc docx rtf)
 
-        PREVIEW_TRANSFORMATIONS = {
-          'doc' => 'pdf',
-          'docx' => 'pdf',
-          'rtf' => 'pdf'
-        }
+        has_one :pdf_preview, -> { where(file_type: 'pdf') }, class_name: 'AttachmentPreview', dependent: :destroy
 
-        has_one :attachment_preview, :dependent => :destroy
-
-        after_save :generate_preview
+        after_save :generate_pdf_preview
       end
 
+      def has_pdf_preview?
+        pdf_preview && pdf_preview.file_exists?
+      end
 
-      def try_to_generate_preview
-        return if preview_format.nil? || has_transformed_preview?
-        if attachment_preview
-          attachment_preview.create_preview
+      def generate_pdf_preview( force = false )
+        return unless convertible_to_pdf?
+
+        return if has_pdf_preview? && !force
+
+        if pdf_preview
+          pdf_preview.create_preview
         else
-          create_attachment_preview(:file_type => preview_format)
+          create_pdf_preview(file_type: 'pdf')
         end
       end
 
-      def transformed_preview
-        try_to_generate_preview
-        attachment_preview
+      def convertible_to_pdf?
+        PDF_PREVIEW_ALLOWED_FOR.include? filename.rpartition('.')[2].downcase
       end
 
-      def has_transformed_preview?
-        attachment_preview && attachment_preview.file_exists?
-      end
-
-      private
-
-      def preview_format
-        @preview_format ||= PREVIEW_TRANSFORMATIONS[filename.rpartition(".")[2].downcase]
-      end
-
-      def generate_preview
-        try_to_generate_preview
-        true
-      end
     end
   end
 end

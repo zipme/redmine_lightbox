@@ -1,0 +1,80 @@
+<script>
+  //<![CDATA[
+
+  $(document).ready(function () {
+
+    var urlTail = function (url) {
+      var matched = url.match(/\/\d+\/[^\/]+$/);
+      return matched && matched[0];
+    };
+
+    // Gallery items
+    var items = <%= lightbox_gallery_items.to_json.html_safe %>;
+    items.forEach(function (item) {
+      if (item.itemType === 'pdf' || item.itemType === 'doc' ) {
+
+        // Find links to to docs with available pdf preview
+        var links_to_docs = $.grep($('a'), function(e){
+          return urlTail(e.href) === urlTail(item.matchUrl);
+        });
+
+        // Add preview link
+        links_to_docs.forEach(function (link_to_doc) {
+          $(link_to_doc).after(' <a class="icon-only icon-magnifier" title="PDF" href="' + item.matchUrl + '"></a>');
+        });
+      }
+    });
+
+    function showGalleryFor(url) {
+      var attachmentClicked = urlTail(url);
+      var itemIndex = -1;
+
+      // Find clicked item index
+      for (var i = 0; i < items.length; i += 1) {
+        if (urlTail(items[i].matchUrl) === attachmentClicked) {
+          itemIndex = i;
+          break;
+        }
+      }
+
+      // If url not found
+      if (itemIndex < 0) {
+        return false;
+      }
+
+      // Init gallery
+      $('#lightGallery').lightGallery({
+        thumbnail: false,
+        dynamic: true,
+        dynamicEl: items
+      });
+
+      // Slide gallery to clicked item
+      $('#lightGallery').on('onAfterOpen.lg', function () {
+        $('#lightGallery').data('lightGallery').slide(itemIndex);
+        $('#lightGallery').data('lightGallery').index = itemIndex;
+        $('#lightGallery').off('onAfterOpen.lg');
+        return true;
+      });
+
+      return true;
+    }
+
+    $('a.icon-magnifier').on('click', function (e) {
+      if (showGalleryFor(this.href)) {
+        e.preventDefault();
+      }
+      return false;
+    });
+
+    $('a > img').on('click', function (e) {
+      var url = $(this).parent()[0].href;
+      if (showGalleryFor(url)) {
+        e.preventDefault();
+      }
+      return false;
+    });
+  });
+
+  //]]>
+</script>

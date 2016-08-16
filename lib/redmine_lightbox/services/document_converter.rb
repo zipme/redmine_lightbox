@@ -3,6 +3,7 @@ module RedmineLightbox
     class DocumentConverter
       # https://github.com/dagwieers/unoconv
       CONVERTER = 'unoconv'
+      # CONVERTER = 'unoconv --server=127.0.0.1 --no-launch'
 
       class << self
         def convert(filename, output_format)

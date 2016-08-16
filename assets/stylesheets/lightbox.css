@@ -1,18 +1,20 @@
-div.attachments .image_attachment_preview {
-    width: auto !important;
-    width: 180px;
-    max-width: 180px;
-    max-height: 200px;
-}
+/* Override path to images */
 
-div.attachments div.images a.lightbox
-{
-  margin: 0px 5px;
+.lg-outer .lg-has-vimeo .lg-video-play {
+    background: url("../images/vimeo-play.png") no-repeat scroll 0 0 transparent;
 }
-
-embed.chrome {
-  box-sizing: border-box;
-  width: 100%;
-  height: 100%;
-  padding: 30px;
+.lg-outer .lg-has-vimeo:hover .lg-video-play {
+    background: url("../images/vimeo-play.png") no-repeat scroll 0 -58px transparent;
+}
+.lg-outer .lg-has-html5 .lg-video-play {
+    background: transparent url("../images/video-play.png") no-repeat scroll 0 0;
+}
+.lg-outer .lg-has-youtube .lg-video-play {
+    background: url("../images/youtube-play.png") no-repeat scroll 0 0 transparent;
+}
+.lg-outer .lg-has-youtube:hover .lg-video-play {
+    background: url("../images/youtube-play.png") no-repeat scroll 0 -60px transparent;
+}
+.lg-outer .lg-item {
+    background: url("../images/loading.gif") no-repeat scroll center center transparent;
 }

@@ -1,14 +1,16 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class AttachmentTest < ActionController::IntegrationTest
-  fixtures :attachments, :users
+class AttachmentTest < ActionDispatch::IntegrationTest
+  fixtures :users, :projects, :roles, :members, :member_roles,
+           :enabled_modules, :issues, :trackers, :attachments,
+           :versions, :wiki_pages, :wikis, :documents
 
   def setup
     set_fixtures_attachments_directory
 
-    @some_file = Attachment.find_by_filename("source.rb")
+    @some_file = Attachment.find_by_filename('source.rb')
 
-    @some_file.create_attachment_preview(:file_type => "pdf")
+    @some_file.create_attachment_preview(file_type: 'pdf')
   end
 
   def test_should_get_file

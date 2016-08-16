@@ -1,7 +1,7 @@
 class AttachmentPreview < ActiveRecord::Base
   belongs_to :attachment
 
-  validates :attachment, :presence => true
+  validates :attachment, presence: true
 
   before_save :create_preview
 
